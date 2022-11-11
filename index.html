@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <h2 class="text-center pt-5">My shopping cart</h2>
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item inputBox">
+                        <div class="input-group number-spinner">
+                           <button onclick="ProjectMinusBtn('count','price','total')" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="count" type="number" min="0" class="text-center" value="0">
+                           <button onclick="ProjectPlusBtn('count','price','total')" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5> $<span id="price">100</span></h5> <br>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                    <div class="text-end my__left">
+                     <h5>Total Prices $<span id="total">00</span></h5>
+                    </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button onclick="ProjectMinusBtn('count1','price1','total1')" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="count1" type="number" min="0" class="text-center" value="0">
+                           <button onclick="ProjectPlusBtn('count1','price1','total1')" id="ProjectPlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$ <span id="price1">50</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                     <div class="text-end my__left">
+                        <h5>Total Prices $<span id="total1">00</span></h5>
+                       </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="row justify-content-end">
+                        <div class="col-4">
+                           
+                           <div class="text-end" id="CouponCode">
+                              <input id="CusonCodeBox" class="form-control" type="text" placeholder="Enter Your Coupon code">
+                              <span id="cuopnCodeGaranat"> 2hHSzFe3</span>
+                              <span> Use The Cuopn Code 50 Tk Discount</span>
+                              <button id="CouponCodeBtn" class="btn btn-success">Apply</button>
+                           </div><br>
+                          
+
+                          </div>
+                     </div><br>
+                     <div class="col-md-8">
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="Subtotal">0</span></h5>
+                     </div>
+                   
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+               <span id="showid"></span>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+   <script>
+
+    
+
+      function ProjectPlusBtn(inDec,prc,totls){
+         var count = document.getElementById(inDec);
+         var prices = document.getElementById(prc);
+         var total = document.getElementById(totls);
+         var Subtotal = document.getElementById("Subtotal").innerText;
+         var CouponCode = document.getElementById("CouponCode");
+
+         if(count.value>=5){
+            count.value = 5;
+            alert("You Are Don't Select Project")
+         }
+   
+      else{
+         count.value++;
+         var result = parseInt(prices.innerText) + parseInt(total.innerText);
+         total.innerText = result;
+         projectTotalPrice = parseInt(prices.innerText) + parseInt(Subtotal);
+
+         document.getElementById("Subtotal").innerText = projectTotalPrice;
+
+         if(Subtotal >= 400){
+            document.getElementById("CouponCode").style.display = "block";
+
+         }
+         else{
+            document.getElementById("CouponCode").style.display = "none";
+         }
+
+      }
+    
+
+   }
+
+   function ProjectMinusBtn(inDec,prc,totls){
+      var count = document.getElementById(inDec);
+         var price1 = document.getElementById(prc);
+         var total1 = document.getElementById(totls);
+         var count = document.getElementById(inDec);
+         var Subtotal = document.getElementById("Subtotal").innerText;
+
+      if(count.value<=0){
+         count.value = 0;
+         alert("You Are Select Minimum 1 Project")
+      }
+      
+      else{
+         count.value--;
+         var result =  parseInt(total1.innerText) - parseInt(price1.innerText)
+         total1.innerText = result;
+         projectTotalPrice =  parseInt(Subtotal) - parseInt(price1.innerText);
+
+         document.getElementById("Subtotal").innerText = projectTotalPrice;
+         if(Subtotal >= 500){
+            document.getElementById("CouponCode").style.display = "block";
+
+         }
+         else{
+            document.getElementById("CouponCode").style.display = "none";
+         }
+      }
+   }
+  
+
+
+     
+
+
+   var CouponCodeBtn = document.getElementById("CouponCodeBtn");
+
+   CouponCodeBtn.addEventListener("click",function(){
+      var CusonCodeBox = document.getElementById("CusonCodeBox");
+     var totalAmount =  document.getElementById("Subtotal").innerText;
+
+      if(CusonCodeBox.value == "2hHSzFe3"){
+         var TotalAmountG = parseInt(totalAmount) - 50;
+         document.getElementById("Subtotal").innerText = TotalAmountG;
+         document.getElementById("CusonCodeBox").value = "";
+         document.getElementById("CouponCode").style.display = "none";
+      }
+      else{
+         document.getElementById("CusonCodeBox").value = "";
+         // document.getElementById("CusonCodeBox").style.display = "none";
+      }
+   });
+
+
+   </script>
+</body>
+</html>
